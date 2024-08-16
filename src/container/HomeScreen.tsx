@@ -5,6 +5,7 @@ import {
   Image,
   ImageBackground,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -16,28 +17,35 @@ const HomeScreen: React.FC<Props> = () => {
   return (
     <View>
       <Header />
-      <ImageBackground
-        style={styles.imageBackground}
-        resizeMode={"stretch"}
-        source={require("@assets/images/homeBackground.png")}
-      >
-        <Text style={styles.textName}>Hey Swara </Text>
+      <ScrollView bounces={false} contentContainerStyle={styles.scrollContain}>
+        <ImageBackground
+          style={styles.imageBackground}
+          resizeMode={"stretch"}
+          source={require("@assets/images/homeBackground.png")}
+        >
+          <Text style={styles.textName}>Hey Swara </Text>
 
-        <View style={styles.itemCenter}>
-          <Text style={styles.subtext}>Begin your healing journey</Text>
+          <View style={styles.itemCenter}>
+            <Text style={styles.subtext}>Begin your healing journey</Text>
 
-          <Image
-            style={styles.groupAvatar}
-            source={require("@assets/images/groupAvatar.png")}
-          />
-          <Text style={styles.completeText}>Completely confidential</Text>
-        </View>
+            <Image
+              style={styles.groupAvatar}
+              source={require("@assets/images/groupAvatar.png")}
+            />
+            <Text style={styles.completeText}>Completely confidential</Text>
+          </View>
 
-        <Pressable style={styles.findButton}>
-          <Text style={styles.findTherapist}>Find my therapist</Text>
-        </Pressable>
-      </ImageBackground>
-      <PlannerCard />
+          <Pressable style={styles.findButton}>
+            <Text style={styles.findTherapist}>Find my therapist</Text>
+          </Pressable>
+        </ImageBackground>
+        <PlannerCard type="Morning" />
+        <PlannerCard type="Morning" />
+        <PlannerCard type="Evening" />
+        <PlannerCard type="Evening" />
+        <PlannerCard type="Afternoon" />
+        <PlannerCard type="Afternoon" />
+      </ScrollView>
     </View>
   )
 }
@@ -88,6 +96,9 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     zIndex: 200,
     justifyContent: "center",
+  },
+  scrollContain: {
+    paddingBottom: 50,
   },
 })
 

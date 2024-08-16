@@ -1,8 +1,10 @@
 import { Colors } from "@/constant/Color"
+import { checkTypeOfPlan } from "@/constant/Helper"
 import { useNavigation } from "@react-navigation/native"
 import * as React from "react"
 import {
   ImageBackground,
+  Platform,
   Pressable,
   PressableProps,
   StyleSheet,
@@ -11,25 +13,29 @@ import {
 } from "react-native"
 import { Icon } from "./Icon"
 
+export type PlanType = "Morning" | "Afternoon" | "Evening"
+
 interface IconProps extends PressableProps {
   title?: string // Pass props if needed
+  type: PlanType
 }
 
 export function PlannerCard(props: IconProps) {
+  const { type } = props
   const navigation = useNavigation()
 
   return (
     <Pressable style={styles.container}>
       <ImageBackground
         style={{ height: 120, width: "100%", justifyContent: "center" }}
-        source={require("@assets/images/morningCard.png")}
+        source={checkTypeOfPlan(type)}
         resizeMode="contain"
       >
         <View
           style={{
             height: 80,
-            marginLeft: 60,
-            marginRight: 100,
+            marginLeft: Platform.OS === "android" ? 80 : 60,
+            marginRight: Platform.OS === "android" ? 120 : 100,
             justifyContent: "space-between",
           }}
         >
@@ -40,6 +46,7 @@ export function PlannerCard(props: IconProps) {
                 fontSize: 18,
                 color: Colors.TextColor,
               }}
+              numberOfLines={1}
             >
               Morning meditation 2
             </Text>
@@ -50,6 +57,7 @@ export function PlannerCard(props: IconProps) {
                 lineHeight: 20,
                 color: Colors.TextColor,
               }}
+              numberOfLines={1}
             >
               Affirmation for day
             </Text>
@@ -62,11 +70,20 @@ export function PlannerCard(props: IconProps) {
                 fontFamily: "Quicksand_600SemiBold",
                 fontSize: 16,
                 color: Colors.TextColor,
+                width: "60%",
               }}
+              numberOfLines={1}
             >
               6 min
             </Text>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                width: "40%",
+                justifyContent: "flex-end",
+              }}
+            >
               <Icon icon="coin" size={25} />
               <Text
                 style={{
@@ -74,6 +91,7 @@ export function PlannerCard(props: IconProps) {
                   fontSize: 16,
                   marginLeft: 5,
                 }}
+                numberOfLines={1}
               >
                 10
               </Text>
@@ -90,5 +108,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
+    paddingTop: 20,
   },
 })
