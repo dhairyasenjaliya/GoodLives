@@ -89,6 +89,12 @@ export const iconRegistry = {
   streak: require("../../assets/icons/streak.png"),
   bell: require("../../assets/icons/bell.png"),
   coin: require("../../assets/icons/coin.png"),
+
+  play: require("../../assets/icons/play.png"),
+  pause: require("../../assets/icons/pause.png"),
+  backward: require("../../assets/icons/backward.png"),
+  forward: require("../../assets/icons/forward.png"),
+  share: require("../../assets/icons/share.png"),
 }
 
 const $imageStyleBase: ImageStyle = {

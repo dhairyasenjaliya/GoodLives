@@ -1,5 +1,7 @@
 import HomeScreen from "@/container/HomeScreen"
+import LoginScreen from "@/container/LoginScreen"
 import MyRewardScreen from "@/container/MyRewardScreen"
+import PlannerDetailScreen from "@/container/PlannerDetailScreen"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
 import * as React from "react"
@@ -8,6 +10,8 @@ import { NativeStackScreenProps } from "react-native-screens/lib/typescript/nati
 export type AppStackParamList = {
   HomeScreen: undefined
   MyRewardScreen: undefined
+  PlannerDetailScreen: undefined
+  LoginScreen: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =
@@ -20,7 +24,13 @@ export default function Navigator() {
     <NavigationContainer>
       <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen name="HomeScreen" component={HomeScreen} />
+        <Tab.Screen name="LoginScreen" component={LoginScreen} />
+
         <Tab.Screen name="MyRewardScreen" component={MyRewardScreen} />
+        <Tab.Screen
+          name="PlannerDetailScreen"
+          component={PlannerDetailScreen}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   )

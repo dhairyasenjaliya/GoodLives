@@ -3,4 +3,5 @@ export const Colors = {
   SecondaryColor: "#E0F3E0",
   TextColor: "#394B42",
   WhiteColor: "#FFF",
+  Grey: "##E5E5E5",
 }

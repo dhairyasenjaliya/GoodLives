@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     color: Colors.TextColor,
     marginLeft: 20,
-    marginVertical: 20,
+    marginBottom: 20,
     fontFamily: "Quicksand_600SemiBold",
   },
   findTherapist: {

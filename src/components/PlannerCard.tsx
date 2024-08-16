@@ -16,7 +16,7 @@ import { Icon } from "./Icon"
 export type PlanType = "Morning" | "Afternoon" | "Evening"
 
 interface IconProps extends PressableProps {
-  title?: string // Pass props if needed
+  title?: string
   type: PlanType
 }
 
@@ -25,7 +25,12 @@ export function PlannerCard(props: IconProps) {
   const navigation = useNavigation()
 
   return (
-    <Pressable style={styles.container}>
+    <Pressable
+      onPress={() => {
+        navigation.navigate("PlannerDetailScreen")
+      }}
+      style={styles.container}
+    >
       <ImageBackground
         style={{ height: 120, width: "100%", justifyContent: "center" }}
         source={checkTypeOfPlan(type)}
