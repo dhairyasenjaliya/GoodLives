@@ -1,11 +1,19 @@
 import { Icon } from "@/components"
 import { Colors } from "@/constant/Color"
+import { logout } from "@/store/actions/authActions"
 import * as React from "react"
 import { Image, Pressable, StyleSheet, Text, View } from "react-native"
+import { useDispatch } from "react-redux"
 
 type Props = {}
 
 const MyRewardScreen: React.FC<Props> = () => {
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+  }
+
   return (
     <View>
       <View style={styles.headerContain}>
@@ -37,7 +45,7 @@ const MyRewardScreen: React.FC<Props> = () => {
           source={require("@assets/images/coinBag.png")}
         />
       </View>
-      <Pressable style={styles.findButton}>
+      <Pressable onPress={handleLogout} style={styles.findButton}>
         <Text style={styles.findTherapist}>Go to Home</Text>
       </Pressable>
     </View>

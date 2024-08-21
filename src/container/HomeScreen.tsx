@@ -10,10 +10,15 @@ import {
   Text,
   View,
 } from "react-native"
+import { useSelector } from "react-redux"
 
 type Props = {}
 
 const HomeScreen: React.FC<Props> = () => {
+  const GivenName = useSelector(
+    (state: any) => state.auth?.user?.user?.givenName || ""
+  )
+
   return (
     <View>
       <Header />
@@ -23,7 +28,7 @@ const HomeScreen: React.FC<Props> = () => {
           resizeMode={"stretch"}
           source={require("@assets/images/homeBackground.png")}
         >
-          <Text style={styles.textName}>Hey Swara </Text>
+          <Text style={styles.textName}>Hey, {GivenName} </Text>
 
           <View style={styles.itemCenter}>
             <Text style={styles.subtext}>Begin your healing journey</Text>

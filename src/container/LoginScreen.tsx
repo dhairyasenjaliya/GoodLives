@@ -1,19 +1,26 @@
 import { Icon } from "@/components"
 import { Colors } from "@/constant/Color"
+import { login } from "@/store/actions/authActions"
 import {
   GoogleSignin,
   statusCodes,
 } from "@react-native-google-signin/google-signin"
 import React, { useEffect } from "react"
 import { Image, Pressable, Text, View } from "react-native"
+import { useDispatch } from "react-redux"
 
 export default function App() {
+  const dispatch = useDispatch()
+  // const isAuthenticated = useSelector(
+  //   (state: any) => state.auth.isAuthenticated
+  // )
+  // const user = useSelector((state: any) => state.auth.user)
+
   useEffect(() => {
     configGoogleSignIn() // Initial GoogleSingIn
   }, [])
 
   const configGoogleSignIn = () => {
-    // GoogleSignin.configure()
     GoogleSignin.configure({
       webClientId:
         "836259657720-m4dqn4f0n3pi83lajno9v0jm69bp7d31.apps.googleusercontent.com", //Mandatroy for the Android
@@ -24,7 +31,10 @@ export default function App() {
     try {
       await GoogleSignin.hasPlayServices()
       const res = await GoogleSignin.signIn()
-      console.log("🚀 ~ signIn ~ res:", res)
+      if (res && res.idToken) {
+        console.log("🚀 ~ signIn ~ res:", res)
+        dispatch(login(res))
+      }
     } catch (error) {
       switch (error.code) {
         case statusCodes.SIGN_IN_CANCELLED:
