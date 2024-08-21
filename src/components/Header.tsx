@@ -18,14 +18,14 @@ export function Header(props: IconProps) {
       <Pressable onPress={() => {}}>
         <Icon icon="drawer" size={commonSize} />
       </Pressable>
-      <Pressable
-        onPress={() => {
-          navigation.goBack()
-        }}
-      >
+      <Pressable onPress={() => {}}>
         <Icon icon="streak" size={commonSize} />
       </Pressable>
-      <Pressable onPress={() => {}}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("MyRewardScreen")
+        }}
+      >
         <Icon icon="coin" size={commonSize} />
       </Pressable>
       <Pressable onPress={() => {}}>

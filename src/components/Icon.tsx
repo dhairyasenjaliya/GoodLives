@@ -97,6 +97,12 @@ export const iconRegistry = {
   share: require("../../assets/icons/share.png"),
   back: require("../../assets/icons/back.png"),
   google: require("../../assets/icons/googleIcon.png"),
+
+  // Tab Icons
+  tab1: require("../../assets/icons/tab1.png"),
+  tab2: require("../../assets/icons/tab2.png"),
+  tab3: require("../../assets/icons/tab3.png"),
+  tab4: require("../../assets/icons/tab4.png"),
 }
 
 const $imageStyleBase: ImageStyle = {
