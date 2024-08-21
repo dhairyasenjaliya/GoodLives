@@ -13,9 +13,13 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.goodLives.app",
+      "googleServicesFile": "./firebaseConfigFiles/GoogleService-Info.plist"
     },
     "android": {
+      "package": "com.goodLives.app",
+      "googleServicesFile": "./firebaseConfigFiles/google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -31,6 +35,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "283f1ac8-e79c-47cc-b365-312bc124ffc2"
+      }
     }
   }
 }

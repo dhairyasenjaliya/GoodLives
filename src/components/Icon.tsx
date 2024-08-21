@@ -95,6 +95,7 @@ export const iconRegistry = {
   backward: require("../../assets/icons/backward.png"),
   forward: require("../../assets/icons/forward.png"),
   share: require("../../assets/icons/share.png"),
+  back: require("../../assets/icons/back.png"),
 }
 
 const $imageStyleBase: ImageStyle = {
