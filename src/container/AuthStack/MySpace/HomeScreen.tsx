@@ -1,7 +1,11 @@
 import { Header, PlannerCard } from "@/components"
 import { Colors } from "@/constant/Color"
+import { checkEmptyObject } from "@/constant/Helper"
+import { dailyExercisePlanMock, ExerciseInterface } from "@/mock"
+import { FetchListOfPlan } from "@/store/actions/dailyPlanAction"
 import * as React from "react"
 import {
+  FlatList,
   Image,
   ImageBackground,
   Pressable,
@@ -10,19 +14,36 @@ import {
   Text,
   View,
 } from "react-native"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 type Props = {}
 
 const HomeScreen: React.FC<Props> = () => {
+  const dispatch = useDispatch()
+
   const GivenName = useSelector(
     (state: any) => state.auth?.user?.user?.givenName || ""
   )
 
+  const DailyPlan: [] = useSelector(
+    (state: any) => state?.dailyPlan?.dailyExercisePlan || []
+  )
+
+  React.useEffect(() => {
+    // Here we can daily fetch latest list with completion status from API
+    if (!checkEmptyObject(DailyPlan)) {
+      dispatch(FetchListOfPlan(dailyExercisePlanMock))
+    }
+  }, [])
+
   return (
     <View>
       <Header />
-      <ScrollView bounces={false} contentContainerStyle={styles.scrollContain}>
+      <ScrollView
+        nestedScrollEnabled
+        bounces={false}
+        contentContainerStyle={styles.scrollContain}
+      >
         <ImageBackground
           style={styles.imageBackground}
           resizeMode={"stretch"}
@@ -44,12 +65,15 @@ const HomeScreen: React.FC<Props> = () => {
             <Text style={styles.findTherapist}>Find my therapist</Text>
           </Pressable>
         </ImageBackground>
-        <PlannerCard type="Morning" />
-        <PlannerCard type="Morning" />
-        <PlannerCard type="Evening" />
-        <PlannerCard type="Evening" />
-        <PlannerCard type="Afternoon" />
-        <PlannerCard type="Afternoon" />
+
+        <FlatList
+          data={DailyPlan}
+          renderItem={(data: { item: ExerciseInterface }) => {
+            return <PlannerCard data={data?.item} />
+          }}
+          keyExtractor={item => item?.id.toString()}
+          scrollEnabled={false}
+        />
       </ScrollView>
     </View>
   )

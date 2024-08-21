@@ -7,6 +7,7 @@ import PlannerDetailScreen from "@/container/AuthStack/MySpace/PlannerDetailScre
 import SupportGroupScreen from "@/container/AuthStack/SupportGroup"
 import WellnessLibrary from "@/container/AuthStack/WellnessLibrary"
 import LoginScreen from "@/container/UnAuthStack/LoginScreen"
+import { ExerciseInterface } from "@/mock"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
@@ -32,7 +33,9 @@ export type AppStackParamList = {
 export type HomeStackList = {
   HomeScreen: undefined
   MyRewardScreen: undefined
-  PlannerDetailScreen: undefined
+  PlannerDetailScreen: {
+    PlanDetail: ExerciseInterface
+  }
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =

@@ -97,6 +97,7 @@ export const iconRegistry = {
   share: require("../../assets/icons/share.png"),
   back: require("../../assets/icons/back.png"),
   google: require("../../assets/icons/googleIcon.png"),
+  check: require("../../assets/icons/check.png"),
 
   // Tab Icons
   tab1: require("../../assets/icons/tab1.png"),

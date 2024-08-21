@@ -31,7 +31,7 @@ const MyRewardScreen: React.FC<Props> = () => {
               style={styles.happyIcon}
               source={require("@assets/images/happyCoin.png")}
             />
-            <Text>10</Text>
+            <Text style={styles.coinText}>10</Text>
           </View>
           <Text style={styles.happinesCoin}> Happiness coins</Text>
         </View>
@@ -68,6 +68,13 @@ const styles = StyleSheet.create({
   coinBagIcon: {
     height: 180,
     width: 180,
+  },
+  coinText: {
+    fontSize: 24,
+    lineHeight: 30,
+    color: Colors.PrimaryColor,
+    fontFamily: "Quicksand_600SemiBold",
+    marginLeft: 40,
   },
   happyIcon: {
     height: 58,

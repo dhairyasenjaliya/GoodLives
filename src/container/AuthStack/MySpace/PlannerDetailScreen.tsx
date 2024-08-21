@@ -1,6 +1,10 @@
 import { Icon } from "@/components"
 import { Colors } from "@/constant/Color"
+import { ExerciseInterface } from "@/mock"
+import { HomeStackList } from "@/navigator"
+import { UpdateDailyPlan } from "@/store/actions/dailyPlanAction"
 import Slider from "@react-native-community/slider"
+import { RouteProp } from "@react-navigation/native"
 import { Audio } from "expo-av"
 import * as FileSystem from "expo-file-system"
 import * as Sharing from "expo-sharing"
@@ -13,13 +17,42 @@ import {
   Text,
   View,
 } from "react-native"
+import Modal from "react-native-modal"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { useDispatch, useSelector } from "react-redux"
 
-const PlannerDetailScreen = () => {
+type PlanDetailsProps = RouteProp<HomeStackList, "PlannerDetailScreen">
+
+type Props = {
+  route: PlanDetailsProps
+}
+
+const PlannerDetailScreen: React.FC<Props> = ({
+  route: {
+    params: { PlanDetail },
+  },
+}) => {
   const [sound, setSound] = useState<Audio.Sound | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(0)
   const [position, setPosition] = useState(0)
   const interactionRef = useRef<any>(null)
+  const dispatch = useDispatch()
+
+  const DailyPlan: [] = useSelector(
+    (state: any) => state?.dailyPlan?.dailyExercisePlan || []
+  )
+
+  const updateDailyPlan = (array: any, id: number) => {
+    return array?.map((item: ExerciseInterface) =>
+      item.id === id ? { ...item, isCompleted: true } : item
+    )
+  }
+
+  const completedExcersice = () => {
+    const updatedCurrentPlan = updateDailyPlan(DailyPlan, PlanDetail?.id)
+    dispatch(UpdateDailyPlan(updatedCurrentPlan))
+  }
 
   const handleShare = async () => {
     const fileUri = FileSystem.cacheDirectory + "RelaxMusic.mp3"
@@ -104,6 +137,42 @@ const PlannerDetailScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text onPress={completedExcersice}>COMPLETED</Text>
+      <Modal
+        animationOut={"bounceInUp"}
+        isVisible={false}
+        backdropColor={Colors.WhiteColor}
+        backdropOpacity={1}
+      >
+        <SafeAreaView style={{ alignItems: "center" }}>
+          <Image
+            source={require("@assets/images/flame.png")}
+            style={{ height: 160, width: 160 }}
+            resizeMode="contain"
+          />
+          <Pressable
+            style={{
+              width: "80%",
+              backgroundColor: Colors.PrimaryColor,
+              alignItems: "center",
+              height: 50,
+              borderRadius: 32,
+              justifyContent: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                lineHeight: 25,
+                color: Colors.WhiteColor,
+                fontFamily: "Quicksand_600SemiBold",
+              }}
+            >
+              Continue
+            </Text>
+          </Pressable>
+        </SafeAreaView>
+      </Modal>
       <Image
         source={require("@assets/images/relaxBear.png")}
         style={{ height: 160, width: 160 }}
@@ -141,7 +210,6 @@ const PlannerDetailScreen = () => {
             justifyContent: "space-between",
             alignItems: "center",
             paddingHorizontal: 100,
-            // backgroundColor: "red",
           }}
         >
           <Icon icon="backward" size={30} />

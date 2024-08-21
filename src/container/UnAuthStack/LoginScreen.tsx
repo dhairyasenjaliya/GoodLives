@@ -6,15 +6,11 @@ import {
   statusCodes,
 } from "@react-native-google-signin/google-signin"
 import React, { useEffect } from "react"
-import { Image, Pressable, Text, View } from "react-native"
+import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native"
 import { useDispatch } from "react-redux"
 
 export default function App() {
   const dispatch = useDispatch()
-  // const isAuthenticated = useSelector(
-  //   (state: any) => state.auth.isAuthenticated
-  // )
-  // const user = useSelector((state: any) => state.auth.user)
 
   useEffect(() => {
     configGoogleSignIn() // Initial GoogleSingIn
@@ -23,7 +19,7 @@ export default function App() {
   const configGoogleSignIn = () => {
     GoogleSignin.configure({
       webClientId:
-        "836259657720-m4dqn4f0n3pi83lajno9v0jm69bp7d31.apps.googleusercontent.com", //Mandatroy for the Android
+        "836259657720-m4dqn4f0n3pi83lajno9v0jm69bp7d31.apps.googleusercontent.com", // Mandatroy for the Android
     })
   }
 
@@ -44,55 +40,58 @@ export default function App() {
           console.error("Google Play Services are needed")
           break
       }
+      if (error) {
+        Alert.alert("Login Error")
+      }
       console.log("Error", error.code)
     }
   }
 
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
-      <Text
-        style={{
-          fontFamily: "Quicksand_600SemiBold",
-          fontSize: 24,
-          lineHeight: 30,
-          textAlign: "center",
-          marginVertical: 60,
-        }}
-      >
-        Welcome back to GoodLives
-      </Text>
+    <View style={styles.screenContain}>
+      <Text style={styles.loginTitle}>Welcome back to GoodLives</Text>
       <Image
         source={require("@assets/images/loginBear.png")}
-        style={{ height: 220, width: 220 }}
+        style={styles.bearLogo}
       />
       <Pressable
         onPress={() => {
           signIn()
         }}
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: Colors.Lavender,
-          width: "80%",
-          borderRadius: 32,
-          height: 55,
-          marginTop: 80,
-        }}
+        style={styles.button}
       >
-        <Text
-          style={{
-            fontFamily: "Quicksand_600SemiBold",
-            fontSize: 16,
-            lineHeight: 20,
-            color: Colors.TextColor,
-            marginRight: 5,
-          }}
-        >
-          Continue with
-        </Text>
+        <Text style={styles.buttonText}>Continue with</Text>
         <Icon icon="google" size={22} />
       </Pressable>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  screenContain: { flex: 1, alignItems: "center" },
+  loginTitle: {
+    fontFamily: "Quicksand_600SemiBold",
+    fontSize: 24,
+    lineHeight: 30,
+    textAlign: "center",
+    marginVertical: 60,
+  },
+  bearLogo: { height: 220, width: 220 },
+  button: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.Lavender,
+    width: "80%",
+    borderRadius: 32,
+    height: 55,
+    marginTop: 80,
+  },
+  buttonText: {
+    fontFamily: "Quicksand_600SemiBold",
+    fontSize: 16,
+    lineHeight: 20,
+    color: Colors.TextColor,
+    marginRight: 5,
+  },
+})
