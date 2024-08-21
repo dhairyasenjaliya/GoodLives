@@ -4,4 +4,5 @@ export const Colors = {
   TextColor: "#394B42",
   WhiteColor: "#FFF",
   Grey: "##E5E5E5",
+  Lavender: "#E8EBFF",
 }

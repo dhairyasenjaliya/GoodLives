@@ -96,6 +96,7 @@ export const iconRegistry = {
   forward: require("../../assets/icons/forward.png"),
   share: require("../../assets/icons/share.png"),
   back: require("../../assets/icons/back.png"),
+  google: require("../../assets/icons/googleIcon.png"),
 }
 
 const $imageStyleBase: ImageStyle = {

@@ -16,7 +16,13 @@ import { Icon } from "./Icon"
 export type PlanType = "Morning" | "Afternoon" | "Evening"
 
 interface IconProps extends PressableProps {
+  /**
+   * The title of the card
+   */
   title?: string
+  /**
+   * Type of the card
+   */
   type: PlanType
 }
 

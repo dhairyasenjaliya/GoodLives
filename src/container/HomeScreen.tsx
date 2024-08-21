@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   groupAvatar: { height: 100, width: 120, marginVertical: 20 },
   findButton: {
     height: 45,
-    width: 250,
+    width: "60%",
     backgroundColor: Colors.PrimaryColor,
     alignSelf: "center",
     position: "absolute",

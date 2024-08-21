@@ -1,9 +1,11 @@
+import { Icon } from "@/components"
+import { Colors } from "@/constant/Color"
 import {
   GoogleSignin,
   statusCodes,
 } from "@react-native-google-signin/google-signin"
 import React, { useEffect } from "react"
-import { Button, View } from "react-native"
+import { Image, Pressable, Text, View } from "react-native"
 
 export default function App() {
   useEffect(() => {
@@ -37,13 +39,50 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Button
-        title="Login with Google"
+    <View style={{ flex: 1, alignItems: "center" }}>
+      <Text
+        style={{
+          fontFamily: "Quicksand_600SemiBold",
+          fontSize: 24,
+          lineHeight: 30,
+          textAlign: "center",
+          marginVertical: 60,
+        }}
+      >
+        Welcome back to GoodLives
+      </Text>
+      <Image
+        source={require("@assets/images/loginBear.png")}
+        style={{ height: 220, width: 220 }}
+      />
+      <Pressable
         onPress={() => {
           signIn()
         }}
-      />
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: Colors.Lavender,
+          width: "80%",
+          borderRadius: 32,
+          height: 55,
+          marginTop: 80,
+        }}
+      >
+        <Text
+          style={{
+            fontFamily: "Quicksand_600SemiBold",
+            fontSize: 16,
+            lineHeight: 20,
+            color: Colors.TextColor,
+            marginRight: 5,
+          }}
+        >
+          Continue with
+        </Text>
+        <Icon icon="google" size={22} />
+      </Pressable>
     </View>
   )
 }
